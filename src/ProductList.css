@@ -12,7 +12,7 @@ body {
 
 /* Navbar */
 .navbar {
-    background-color: #4CAF50;
+    background-color: #137517;
     color: #fff!important;
     padding: 15px;
     display: flex;
@@ -33,7 +33,7 @@ body {
 }
 
 .navbar .ul div a {
-    color: white;
+    color: rgb(204, 179, 179);
     font-size: 30px;
     text-decoration: none;
    
@@ -65,7 +65,7 @@ body {
     max-width: calc(26.33% - 20px); /* Adjust max-width for 3 cards per row with 20px gap */
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #fff;
+    background-color: #a57a7a;
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
@@ -87,7 +87,7 @@ body {
 }
 
 .product-price {
-    color: #e74c3c;
+    color: #e94b3a;
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
