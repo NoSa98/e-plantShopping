@@ -7,27 +7,28 @@ export const CartSlice = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
-        const {name, image, cost} = action.payload;
-        const existingItem = state.items.find(item => item.name === name);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            state.items.push({name, image, cost, quantity:1});
-        }
+      const { payload } = action
+      state.items.push({
+        ...payload,
+        quantity: 1
+      });
     },
-
     removeItem: (state, action) => {
-        const {name} = action.payload;
-        state.items = state.items.filter(item => item.name !== action.payload);
-           
+      const { name } = action.payload
+      state.items = state.items.filter(el => el.name !== name);
     },
-
     updateQuantity: (state, action) => {
-        const { name, quantity } = action.payload;
-        const itemToUpdate = state.items.find(item => item.name === name);
-        if (itemToUpdate) {
-            itemToUpdate.quantity = quantity;  
-        }
+      const { item, type } = action.payload
+      switch (type) {
+        case 'inc':
+          state.items = state.items.map(el => el.name === item.name ? { ...el, quantity: el.quantity + 1 } : el);
+          break;
+        case 'dec':
+          state.items = state.items.map(el => el.name === item.name ? { ...el, quantity: el.quantity > 1 ? el.quantity - 1 : 1 } : el);
+          break;
+        default:
+          return;
+      }
     },
   },
 });

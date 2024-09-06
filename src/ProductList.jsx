@@ -1,11 +1,12 @@
 import React, { useState,useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+import { addItem } from './CartSlice';
+
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
-
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -247,14 +248,16 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
+
   const handleAddToCart = (product) => {
-  dispatch(addItem(product));
-  setAddedToCart((prevState) => ({
-     ...prevState,
-     [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
-   }));
-};
-    return (
+    dispatch(addItem(product));
+    setAddedToCart((prevState) => (
+        { ...prevState, [product.name]: true, //Set the product name as key and value as true to indicate it's added to cart
+     }
+    ));
+};    
+  
+  return (
         <div>
              <div className="navbar" style={styleObj}>
             <div className="tag">
@@ -285,14 +288,15 @@ const handlePlantsClick = (e) => {
                 <img className="product-image" src={plant.image} alt={plant.name} />
                 <div className="product-title">{plant.name}</div>
                 {/*Similarly like the above plant.name show other details like description and cost*/}
+                <div><h5 style={{size: 10, color: '#0b6b3b'}}>{plant.description} </h5> </div>
+                <div><h5 style={{size: 10, color:'#33e307'}}>{plant.cost} </h5> </div>
+    
                 <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
             </div>
             ))}
         </div>
     </div>
     ))}
-
-
         </div>
  ) :  (
     <CartItem onContinueShopping={handleContinueShopping}/>
